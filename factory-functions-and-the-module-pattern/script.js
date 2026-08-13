@@ -1,36 +1,30 @@
 "use strict";
 
-function createUser(name) {
-    const discordName = "@" + name;
+const calculator = (() => {
+    let lastResult;
 
-    let reputation = 0;
-    const getReputation = () => reputation;
-    const giveReputation = () => { reputation++; };
+    const add = (a, b) => {
+        lastResult = a + b;
+        return lastResult;
+    };
+    const subtract = (a, b) => {
+        lastResult = a - b;
+        return lastResult;
+    };
+    const multiply = (a, b) => {
+        lastResult = a * b;
+        return lastResult;
+    };
+    const divide = (a, b) => {
+        lastResult = a / b;
+        return lastResult;
+    };
+    const getLastResult = () => lastResult;
 
-    return { name, discordName, getReputation, giveReputation };
-}
+    return { add, subtract, multiply, divide, getLastResult };
+})();
 
-// function createPlayer(name, level) {
-//     const { getReputation, giveReputation } = createUser(name);
-
-//     const getLevel = () => level;
-//     const increaseLevel = () => { level++; };
-//     return {
-//         name,
-//         getReputation,
-//         giveReputation,
-//         getLevel,
-//         increaseLevel,
-//     };
-// }
-
-function createPlayer(name, level) {
-    const user = createUser(name);
-
-    const getLevel = () => level;
-    const increaseLevel = () => { level++; };
-    return Object.assign({}, user, { getLevel, increaseLevel });
-}
-
-const leon = createPlayer("leon", 1);
-console.log(leon);
+console.log(calculator.add(3, 5)); // 8
+console.log(calculator.subtract(6, 2)); // 4
+console.log(calculator.getLastResult()); // 4
+console.log(calculator.multiply(14, 5534)); // 77476
