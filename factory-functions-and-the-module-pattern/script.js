@@ -1,10 +1,5 @@
 "use strict";
 
-function User(name) {
-    this.name = name;
-    this.discordName = "@" + name;
-}
-
 function createUser(name) {
     const discordName = "@" + name;
 
@@ -15,12 +10,27 @@ function createUser(name) {
     return { name, discordName, getReputation, giveReputation };
 }
 
-const josh = createUser("josh");
-josh.giveReputation();
-josh.giveReputation();
+// function createPlayer(name, level) {
+//     const { getReputation, giveReputation } = createUser(name);
 
-// logs { discordName: "@josh", reputation: 2 }
-console.log({
-    discordName: josh.discordName,
-    reputation: josh.getReputation()
-});
+//     const getLevel = () => level;
+//     const increaseLevel = () => { level++; };
+//     return {
+//         name,
+//         getReputation,
+//         giveReputation,
+//         getLevel,
+//         increaseLevel,
+//     };
+// }
+
+function createPlayer(name, level) {
+    const user = createUser(name);
+
+    const getLevel = () => level;
+    const increaseLevel = () => { level++; };
+    return Object.assign({}, user, { getLevel, increaseLevel });
+}
+
+const leon = createPlayer("leon", 1);
+console.log(leon);
