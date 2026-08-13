@@ -1,28 +1,23 @@
 "use strict";
 
-// This is a global variable
-let globalAge = 23;
+function makeAddingFunction(firstNumber) {
+    // firstNumber is scoped anywhere within makeAddingFunction,
+    // including returnedFunction
+    // any variables declared here will also be accessible within returnedFunction
 
-// This is a function - and hey, a curly brace indicating a block
-function printAge(age) {
-    // This is a function scoped variable
-    var varAge = 34;
-
-    // This is yet another curly brace, and thus a block
-    if (age > 0) {
-        // This is a block-scoped variable that exists
-        // within its nearest enclosing block: the if's block
-        const constAge = age * 2;
-        console.log(constAge);
+    // we don't need to name the returned function
+    // this is just to reference more easily in explanation
+    return function returnedFunction(secondNumber) {
+        // secondNumber is scoped only within returnedFunction
+        return firstNumber + secondNumber;
     }
-
-    // ERROR! We tried to access a block scoped variable
-    // outside its scope
-    console.log(constAge);
 }
 
-printAge(globalAge);
+const add5 = makeAddingFunction(5);
+console.log(add5(2)); // 7
 
-// ERROR! We tried to access a function scoped variable
-// outside the function it's defined in
-console.log(varAge);
+const add8 = makeAddingFunction(8);
+console.log(add8(2)); // 10
+
+const add79100105110 = makeAddingFunction(79100105110);
+console.log(add79100105110(111687378)); // 79211792488
