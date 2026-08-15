@@ -1,64 +1,43 @@
 "use strict";
 
-// const counter = (function () {
-//     let privateCounter = 0;
-//     function changeBy(val) {
-//         privateCounter += val;
-//     }
-
-//     return {
-//         increment() {
-//             changeBy(1);
-//         },
-
-//         decrement() {
-//             changeBy(-1);
-//         },
-
-//         value() {
-//             return privateCounter;
-//         },
-//     };
-// })();
-
-// console.log(counter.value()); // 0.
-
-// counter.increment();
-// counter.increment();
-// console.log(counter.value()); // 2.
-
-// counter.decrement();
-// console.log(counter.value()); // 1.
-
-function makeCounter() {
-    let privateCounter = 0;
-    function changeBy(val) {
-        privateCounter += val;
-    }
-    return {
-        increment() {
-            changeBy(1);
-        },
-
-        decrement() {
-            changeBy(-1);
-        },
-
-        value() {
-            return privateCounter;
-        },
-    };
+function showHelp(help) {
+    document.getElementById("help").textContent = help;
 }
 
-const counter1 = makeCounter();
-const counter2 = makeCounter();
+// function makeHelpCallback(help) {
+//     return function () {
+//         showHelp(help);
+//     };
+// }
 
-console.log(counter1.value()); // 0.
+function setupHelp() {
+    const helpText = [
+        { id: "email", help: "Your email address" },
+        { id: "name", help: "Your full name" },
+        { id: "age", help: "Your age (you must be over 16)" },
+    ];
 
-counter1.increment();
-counter1.increment();
-console.log(counter1.value()); // 2.
+    // for (let i = 0; i < helpText.length; i++) {
+    //     // (function () {
+    //     // Culprit is the use of `var` on this line
+    //     const item = helpText[i];
+    //     document.getElementById(item.id).onfocus =
+    //         function () { showHelp(item.help); };
+    //     // })(); // Immediate event listener attachment with the current value of item (preserved until iteration).
+    //     // makeHelpCallback(item.help);
+    // }
 
-counter1.decrement();
-console.log(counter1.value()); // 1.
-console.log(counter2.value()); // 0.
+    // for (const item of helpText) {
+    //     document.getElementById(item.id).onfocus = () => {
+    //         document.getElementById("help").textContent = item.help;
+    //     };
+    // }
+
+    helpText.forEach((item) => {
+        document.getElementById(item.id).onfocus = () => {
+            showHelp(item.help);
+        };
+    });
+}
+
+setupHelp();
