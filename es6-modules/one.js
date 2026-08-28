@@ -1,6 +1,4 @@
-"use strict";   
-const greeting = (() => {
-  const greetingString = "Hello, Odinite!";
-  const farewellString = "Bye bye, Odinite!";
-  return greetingString;
-})();
+const greeting = "Hello, Odinite!";
+const farewell = "Bye bye, Odinite!";
+
+export { greeting };
